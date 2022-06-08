@@ -116,12 +116,15 @@ sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 sudo apt-add-repository universe
 sudo apt-get update -y
-sudo apt-get install terraform python3.9 net-tools graphviz -y
+sudo apt-get install terraform python3.9 python3-pip net-tools graphviz -y
 pip3 install --upgrade pip
 pip3 install blastradius graphviz
 pip3 install -U jinja2
 mkdir -p /home/ubuntu/.aws
-curl -o /home/ubuntu/aws.tf https://github.com/cpaggen/blastradius-ec2/blob/dev/aws.rename
+touch /home/ubuntu/.aws/config
+touch /home/ubuntu/.aws/credentials
+chown -R ubuntu /home/ubuntu/.aws 
+curl -o /home/ubuntu/aws.tf https://raw.githubusercontent.com/cpaggen/blastradius-ec2/dev/aws.rename
 touch /home/ubuntu/semaphore.txt
 echo "done with dependencies" >> /home/ubuntu/user_data.txt
 EOF
