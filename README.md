@@ -15,4 +15,5 @@ proceeding further.
 Once the EC2 instance is deployed, it contains itself a Terraform plan (aws.tf) which creates a simple EC2 instance in a new VPC.
 That is simply meant to test blast-radius.
 
-
+**Note**: you probably will need to log into your cloud instance (replace the name of the SSH keypair in aws_ec2.tf with yours) and start blast-radius manually
+like so >blast-radius --serve ./ --port 8888 
