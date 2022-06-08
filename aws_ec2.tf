@@ -114,10 +114,9 @@ echo "Setting up blast-radius dependencies" > /home/ubuntu/user_data.txt
 sudo hostname "blastradius"
 sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo apt-get update -y && sudo apt-get install terraform -y
-sudo apt-get install software-properties-common -y
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt-get install python3.7 python3-venv python3.7-venv python3-pip net-tools graphviz -y
+sudo apt-add-repository universe
+sudo apt-get update -y
+sudo apt-get install terraform python3.9 net-tools graphviz -y
 pip3 install --upgrade pip
 pip3 install blastradius graphviz
 pip3 install -U jinja2
