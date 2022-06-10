@@ -3,6 +3,11 @@ provider "aws" {
   # credentials come from ~/.aws/credentials (AWS CLI)
 }
 
+variable "FRANKFURTKEY" {
+  default = ""
+  # passed as env variable from Github encrypted secret in action workflow
+}
+
 resource "aws_vpc" "terraformvpc1" {
   cidr_block       = "10.10.0.0/16"
   instance_tenancy = "dedicated"
@@ -132,7 +137,7 @@ EOF
   connection {
     agent       = false
     host        = self.public_ip
-    private_key = var.FRANKFURTKEY // file("frankfurt-keypair-one.pem")
+    private_key = var.FRANKFURTKEY
     type        = "ssh"
     user        = "ubuntu"
   }
