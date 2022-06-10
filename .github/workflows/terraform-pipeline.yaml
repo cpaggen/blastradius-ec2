@@ -37,10 +37,6 @@ jobs:
       id: fmt
       run: terraform fmt -check
  
-    - name: Terraform validate
-      id: validate
-      run: terraform validate -no-color
-
     - name: Terraform init
       id: init
       env:
@@ -49,6 +45,10 @@ jobs:
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION:  ${{ secrets.AWS_DEFAULT_REGION }}
       run: terraform init -input=false
+
+    - name: Terraform validate
+      id: validate
+      run: terraform validate -no-color
 
     - name: Terraform plan
       id: plan
