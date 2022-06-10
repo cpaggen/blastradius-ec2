@@ -5,6 +5,18 @@ provider "aws" {
   # credentials come from Github encrypted secrets passed as ENV vars
 }
 
+variable "AWS_ACCESS_KEY_ID" {
+  default = ""
+}
+
+variable "AWS_SECRET_KEY_ID" {
+  default = ""
+}
+
+variable "AWS_REGION" {
+  default = ""
+}
+
 variable "FRANKFURTKEY" {
   default = ""
   # passed as env variable from Github encrypted secret in action workflow
