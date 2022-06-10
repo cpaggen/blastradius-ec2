@@ -113,4 +113,5 @@ jobs:
         TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
       run: |
         ec2=$(terraform output ec1-public-ip)
-        ssh -f -q -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i $TF_VAR_FRANKFURTKEY -l ubuntu $ec2
+        export MYKEY=`cat $TF_VAR_FRANKFURTKEY`
+        ssh -f -q -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i $MYKEY -l ubuntu $ec2
