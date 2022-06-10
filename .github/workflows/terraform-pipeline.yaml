@@ -104,8 +104,13 @@ jobs:
         TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
       run: terraform apply -auto-approve -input=false -lock=false
 
-    - name: Terraform output EC2 public IP
+    - name: Test SSH to EC2 public IP
+      env:
+        TF_ACTION_WORKING_DIR: 'terraform'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION:  ${{ secrets.AWS_DEFAULT_REGION }}
+        TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
       run: |
         ec2=$(terraform output ec1-public-ip)
-        echo $ec2
-      
+        ssh -f -q -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i $TF_VAR_FRANKFURTKEY -l ubuntu $ec2
