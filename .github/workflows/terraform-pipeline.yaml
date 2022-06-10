@@ -112,6 +112,6 @@ jobs:
         AWS_DEFAULT_REGION:  ${{ secrets.AWS_DEFAULT_REGION }}
         TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
       run: |
-        ec2=$(terraform output ec1-public-ip)
+        ec2=$(terraform output --raw ec1-public-ip)
         nc $ec2 22 -zv
 
