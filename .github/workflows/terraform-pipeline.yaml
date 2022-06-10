@@ -68,7 +68,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION:  ${{ secrets.AWS_DEFAULT_REGION }}
         TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
-      run: terraform plan -no-color --out tfplan.binary -input=false -compact-warnings
+      run: terraform plan -no-color --out tfplan.binary -input=false -compact-warnings -lock=false
 
     - name: Terraform plan Status
       id: evaluate

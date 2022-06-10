@@ -15,4 +15,7 @@ Once the EC2 instance is deployed, it contains itself a Terraform plan (aws.tf) 
 
 Therefore, please SSH into your cloud instance (replace the name of the SSH keypair in aws_ec2.tf with yours), populate your ~/.aws/credentials file, launch Terraform to create the second cloud instance and start blast-radius manuallylike so >blast-radius --serve ./ --port 8888 
 
-[![Deploy Infrastructure](https://github.com/cpaggen/blastradius-ec2/actions/workflows/terraform-pipeline.yaml/badge.svg?branch=dev&event=workflow_run)](https://github.com/cpaggen/blastradius-ec2/actions/workflows/terraform-pipeline.yaml)
+**Using a remote backend is strongly encouraged; without one you will have a hard time destroying your infrastructure using Terraform!**
+
+
+[![Deploy Infrastructure](https://github.com/cpaggen/blastradius-ec2/actions/workflows/terraform-pipeline.yaml/badge.svg?branch=dev)](https://github.com/cpaggen/blastradius-ec2/actions/workflows/terraform-pipeline.yaml)
