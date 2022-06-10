@@ -132,7 +132,7 @@ EOF
   connection {
     agent       = false
     host        = self.public_ip
-    private_key = file("frankfurt-keypair-one.pem")
+    private_key = var.FRANKFURTKEY // file("frankfurt-keypair-one.pem")
     type        = "ssh"
     user        = "ubuntu"
   }
