@@ -104,6 +104,10 @@ jobs:
         TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
       run: terraform apply -auto-approve -input=false -lock=false
 
+    - name: Wait 30s for EC2 to come up
+      run: sleep 30s
+      shell: bash
+
     - name: Test SSH to EC2 public IP
       env:
         TF_ACTION_WORKING_DIR: 'terraform'
