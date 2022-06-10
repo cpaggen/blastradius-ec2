@@ -56,7 +56,7 @@ terraform {
     bucket         = "cpaggen-terraform-state"
     key            = "index"
     dynamodb_table = "cpaggen-tfstate"
-    region         = var.AWS_REGION
+    region         = "eu-central-1"
   }
 }
 
