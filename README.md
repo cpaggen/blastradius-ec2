@@ -1,3 +1,5 @@
+[![Terraform pipeline](https://github.com/cpaggen/blastradius-ec2/actions/workflows/terraform-pipeline.yaml/badge.svg?branch=dev)](https://github.com/cpaggen/blastradius-ec2/actions/workflows/terraform-pipeline.yaml)
+
 # Blast-radius test setup
 
 This repo is automated through a Github workflow.
@@ -17,5 +19,3 @@ Therefore, please SSH into your cloud instance (replace the name of the SSH keyp
 
 **Using a remote backend is strongly encouraged; without one you will have a hard time destroying your infrastructure using Terraform!**
 
-
-[![Deploy Infrastructure](https://github.com/cpaggen/blastradius-ec2/actions/workflows/terraform-pipeline.yaml/badge.svg?branch=dev)](https://github.com/cpaggen/blastradius-ec2/actions/workflows/terraform-pipeline.yaml)
