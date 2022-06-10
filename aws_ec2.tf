@@ -1,6 +1,8 @@
 provider "aws" {
-  region = "eu-central-1"
-  # credentials come from ~/.aws/credentials (AWS CLI)
+  access_key = var.AWS_ACCESS_KEY_ID
+  secret_key = var.AWS_SECRET_ACCESS_KEY
+  region     = var.AWS_REGION
+  # credentials come from Github encrypted secrets passed as ENV vars
 }
 
 variable "FRANKFURTKEY" {
