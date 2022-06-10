@@ -78,8 +78,7 @@ jobs:
     - name: Terraform jsonify
       id: jsonify
       run: |
-        mkdir ./terraform
-        terraform show -json tfplan.binary > ./terraform/tfplan.json
+        terraform show -json tfplan.binary > tfplan.json
 
     - name: Checkov
       id: checkov
@@ -93,9 +92,9 @@ jobs:
       uses: bridgecrewio/checkov-action@master
       with:
         framework: terraform
-        directory: ./terraform
-        #file: tfplan.json
-        quiet: true 
+        file: tfplan.json
+        quiet: false
+        soft_fail: false
 
     - name: Terraform Apply
       id: apply
