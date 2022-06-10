@@ -16,9 +16,6 @@ on:
       - '.gitignore'
       - '**.md'
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 jobs:
   tf_pipeline:
     name: Terraform Pipeline
@@ -105,7 +102,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION:  ${{ secrets.AWS_DEFAULT_REGION }}
         TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
-      run: terraform apply -auto-approve -input=false
+      run: terraform apply -auto-approve -input=false -lock=false
 
     - name: Terraform output EC2 public IP
       run: |
