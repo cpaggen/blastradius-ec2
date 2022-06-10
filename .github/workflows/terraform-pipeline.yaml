@@ -78,12 +78,12 @@ jobs:
     - name: Terraform jsonify
       id: jsonify
       run: |
-        mkdir ~/terraform
-        terraform show -json tfplan.binary > ~/terraform/tfplan.json
+        terraform show -json tfplan.binary > tfplan.json
 
     - name: Checkov
       id: checkov
       env:
+        BC_FROM_BRANCH: 'dev'
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -91,8 +91,7 @@ jobs:
         TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
       uses: bridgecrewio/checkov-action@master
       with:
-        directory: ~/terraform/
-        file: ~/terraform/tfplan.json
+        file: tfplan.json
         quiet: true 
 
     - name: Terraform Apply
