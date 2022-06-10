@@ -148,38 +148,6 @@ touch /home/ubuntu/semaphore.txt
 echo "done with dependencies" >> /home/ubuntu/user_data.txt
 EOF
 
-  connection {
-    agent       = false
-    host        = self.public_ip
-    private_key = var.FRANKFURTKEY
-    type        = "ssh"
-    user        = "ubuntu"
-  }
-
-  provisioner "file" {
-    source      = "/home/cisco/.aws/config"
-    destination = "/home/ubuntu/aws-config"
-  }
-  provisioner "file" {
-    source      = "/home/cisco/.aws/credentials"
-    destination = "/home/ubuntu/aws-credentials"
-  }
-
-  // TF has no way to wait for cloudinit (user_data) to complete
-  // I therefore rely on a simple file-as-a-semaphore hack in the
-  // inline script section below
-  provisioner "remote-exec" {
-    inline = [
-      "while [ ! -f /home/ubuntu/semaphore.txt ]; do sleep 2; done",
-      "mv /home/ubuntu/aws-config /home/ubuntu/.aws/config",
-      "mv /home/ubuntu/aws-credentials /home/ubuntu/.aws/credentials",
-      "terraform init",
-      "terraform plan -out=plan.out",
-      "terraform apply -auto-approve",
-      "blast-radius --serve /home/ubuntu --port 8888 &"
-    ]
-  }
-
   tags = {
     Terraform   = "true"
     Environment = "dev"
