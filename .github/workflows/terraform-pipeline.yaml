@@ -77,8 +77,6 @@ jobs:
 
     - name: Terraform jsonify
       id: jsonify
-      with:
-        directory: terraform/
       run: terraform show -json tfplan.binary > ./terraform/tfplan.json
 
     - name: Checkov
