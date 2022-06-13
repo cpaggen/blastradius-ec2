@@ -20,6 +20,10 @@ jobs:
   tf_pipeline:
     name: Terraform Pipeline
     runs-on: ubuntu-latest 
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v3
@@ -31,7 +35,6 @@ jobs:
         terraform_version: 1.2
         # setting the wrapper to false makes terraform output available to the runner
         terraform_wrapper: false 
-        
  
     - name: Terraform format
       id: fmt
@@ -97,7 +100,7 @@ jobs:
 
     - name: Upload SARIF file
       id: upload_sarif
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: results.sarif
         category: checkov
