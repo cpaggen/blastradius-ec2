@@ -89,7 +89,7 @@ jobs:
       uses: bridgecrewio/checkov-action@master
       with:
         framework: terraform
-        file: tfplan.json
+        file: tfplan.jsonofjesus
         quiet: false
         soft_fail: false
 
