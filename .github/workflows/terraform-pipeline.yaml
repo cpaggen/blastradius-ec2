@@ -75,23 +75,33 @@ jobs:
     - name: Terraform jsonify
       id: jsonify
       run: |
-        terraform show -json tfplan.binary > tfplan.json
+        terraform show -json tfplan.binary | jq '.' > tfplan.json
 
-    - name: Checkov
-      id: checkov
-      env:
-        BC_FROM_BRANCH: 'dev'
-        TF_ACTION_WORKING_DIR: 'terraform'
-        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION:  ${{ secrets.AWS_DEFAULT_REGION }}
-        TF_VAR_FRANKFURTKEY : ${{ secrets.TF_VAR_FRANKFURTKEY }}
-      uses: bridgecrewio/checkov-action@master
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
       with:
-        framework: terraform
-        file: tfplan.jsonofjesus
-        quiet: false
-        soft_fail: false
+        python-version: 3.8
+      id: setup_py
+
+    - name: Install Checkov
+      id: checkov
+      run: |
+        python3 -m pip3 install --upgrade pip3
+        pip3 install checkov
+      continue-on-error: true
+
+    - name: Run Checkov
+      id: run_checkov
+      run: checkov -f tfplan.json -o sarif -s
+      continue-on-error: false
+
+    - name: Upload SARIF file
+      id: upload_sarif
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: results.sarif
+        category: checkov
+      continue-on-error: true
 
     - name: Terraform Apply
       id: apply
