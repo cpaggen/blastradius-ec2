@@ -128,7 +128,7 @@ resource "aws_security_group" "cpaggen-sg" {
   dynamic "ingress" {
     for_each = local.rulesmap
     content {
-      //description = ingress.key # HTTP or SSH
+      description = ingress.key # HTTP or SSH
       from_port   = ingress.value.port
       to_port     = ingress.value.port
       protocol    = "tcp"

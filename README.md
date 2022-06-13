@@ -2,7 +2,16 @@
 
 # Blast-radius test setup
 
-This repo is automated through a Github workflow.
+This repo is automated through a Github workflow. The workflow consists in:
+- Terraform (TF) lint
+- TF validate
+- TF init
+- TF plan
+- Static analysis with Checkov
+- Upload SARIF to Security tab of repo
+- TF apply
+- Test EC2 connectivity
+
 To replicate this, please populate the necessary env variables for Terraform as Github secrets:
 - AWS_ACCESS_KEY_ID
 - AWS_ECRET_KEY_ID
