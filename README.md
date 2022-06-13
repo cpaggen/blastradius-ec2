@@ -28,3 +28,4 @@ Therefore, please SSH into your cloud instance (replace the name of the SSH keyp
 
 **Using a remote backend is strongly encouraged; without one you will have a hard time destroying your infrastructure using Terraform!**
 
+This repo is linked to a spacelift.io stack.
