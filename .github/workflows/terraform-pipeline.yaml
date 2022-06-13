@@ -80,30 +80,18 @@ jobs:
       run: |
         terraform show -json tfplan.binary | jq '.' > tfplan.json
 
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v1
+    - name: tfsec static analysis
+      id: tfsec
+      uses: tfsec/tfsec-sarif-action@9a83b5c3524f825c020e356335855741fd02745f
       with:
-        python-version: 3.8
-      id: setup_py
-
-    - name: Install Checkov
-      id: checkov
-      run: |
-        python3 -m pip install --upgrade pip
-        pip3 install checkov
-      continue-on-error: true
-
-    - name: Run Checkov
-      id: run_checkov
-      run: checkov -f tfplan.json -o sarif -s
-      continue-on-error: false
+        sarif_file: tfsec.sarif
 
     - name: Upload SARIF file
       id: upload_sarif
       uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: results.sarif
-        category: checkov
+        sarif_file: tfsec.sarif
+        category: tfsec
       continue-on-error: true
 
     - name: Terraform Apply
