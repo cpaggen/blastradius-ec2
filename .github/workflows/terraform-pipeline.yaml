@@ -83,6 +83,11 @@ jobs:
         python-version: 3.8
       id: setup_py
 
+    - name: Install pip3
+      id: pip3
+      run: |
+        sudo apt install python3-pip -y
+      
     - name: Install Checkov
       id: checkov
       run: |
