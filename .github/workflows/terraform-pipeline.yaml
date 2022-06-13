@@ -19,7 +19,7 @@ on:
 jobs:
   tf_pipeline:
     name: Terraform Pipeline
-    runs-on: self-hosted
+    runs-on: ubuntu-latest 
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v3
